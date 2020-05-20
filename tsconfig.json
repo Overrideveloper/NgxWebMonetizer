@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-webmonetizer": [
+        "dist/ngx-webmonetizer"
+      ],
+      "ngx-webmonetizer/*": [
+        "dist/ngx-webmonetizer/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

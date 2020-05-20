@@ -2,5 +2,163 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "come-fund-me": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/come-fund-me",
+      "sourceRoot": "projects/come-fund-me/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/come-fund-me",
+            "index": "projects/come-fund-me/src/index.html",
+            "main": "projects/come-fund-me/src/main.ts",
+            "polyfills": "projects/come-fund-me/src/polyfills.ts",
+            "tsConfig": "projects/come-fund-me/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/come-fund-me/src/favicon.ico",
+              "projects/come-fund-me/src/assets"
+            ],
+            "styles": [
+              "projects/come-fund-me/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/come-fund-me/src/environments/environment.ts",
+                  "with": "projects/come-fund-me/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "come-fund-me:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "come-fund-me:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "come-fund-me:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/come-fund-me/src/test.ts",
+            "polyfills": "projects/come-fund-me/src/polyfills.ts",
+            "tsConfig": "projects/come-fund-me/tsconfig.spec.json",
+            "karmaConfig": "projects/come-fund-me/karma.conf.js",
+            "assets": [
+              "projects/come-fund-me/src/favicon.ico",
+              "projects/come-fund-me/src/assets"
+            ],
+            "styles": [
+              "projects/come-fund-me/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/come-fund-me/tsconfig.app.json",
+              "projects/come-fund-me/tsconfig.spec.json",
+              "projects/come-fund-me/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/come-fund-me/e2e/protractor.conf.js",
+            "devServerTarget": "come-fund-me:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "come-fund-me:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ngx-webmonetizer": {
+      "projectType": "library",
+      "root": "projects/ngx-webmonetizer",
+      "sourceRoot": "projects/ngx-webmonetizer/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-webmonetizer/tsconfig.lib.json",
+            "project": "projects/ngx-webmonetizer/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-webmonetizer/src/test.ts",
+            "tsConfig": "projects/ngx-webmonetizer/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-webmonetizer/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-webmonetizer/tsconfig.lib.json",
+              "projects/ngx-webmonetizer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "come-fund-me"
 }
