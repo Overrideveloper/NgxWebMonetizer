@@ -4,11 +4,17 @@ export function INJECT_META_TAG(value: string) {
     tag.name = 'monetization'
 
     const head: HTMLHeadElement = document.getElementsByTagName('head')[0];
+    const monetizationTags: HTMLMetaElement[] = Array.from(document.querySelectorAll('meta[name="monetization"]'));
 
-    const doesTagExist = Array.from(head.children).findIndex(el => el instanceof HTMLMetaElement && el.name === 'monetization' && el.content === value) > -1;
-    const monetizationTags = Array.from(head.children).filter(el => el instanceof HTMLMetaElement && el.name === 'monetization' && el.content !== value);
+    let doesTagExist = false;
 
-    monetizationTags.map(el => head.removeChild(el));
+    monetizationTags.map(tag => {
+        if (tag.content !== value) {
+            head.removeChild(tag);
+        } else {
+            doesTagExist = true;
+        }
+    });
 
     if (!doesTagExist) {
         head.appendChild(tag);
@@ -17,7 +23,8 @@ export function INJECT_META_TAG(value: string) {
 
 export function REMOVE_META_TAG() {
     const head: HTMLHeadElement = document.getElementsByTagName('head')[0];
-    const monetizationTags = Array.from(head.children).filter(el => el instanceof HTMLMetaElement && el.name === 'monetization');
+    const monetizationTags: HTMLMetaElement[] = Array.from(document.querySelectorAll('meta[name="monetization"]'));
+
     monetizationTags.map(el => head.removeChild(el));
 }
 

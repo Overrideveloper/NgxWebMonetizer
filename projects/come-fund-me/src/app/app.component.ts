@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { NgxWebMonetizer } from 'ngx-webmonetizer';
 
+interface IPayment {
+  paymentPointer: string;
+  requestId: string;
+  amount: string;
+  assetCode: string;
+  assetScale: number;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -22,15 +30,19 @@ export class AppComponent {
   }
 
   progress() {
-    const detail = {
+    const detail: IPayment = {
       paymentPointer: "PAY_ME",
       requestId: '12345',
       amount: '289',
       assetCode: 'USD',
-      assetScale: '0.22'
+      assetScale: 2
     };
 
     const event = new CustomEvent("monetizationprogress", { detail });
     (<any> document).monetization.dispatchEvent(event);
+  }
+
+  convertToDate(time: number) {
+    return new Date(time).toDateString();
   }
 }

@@ -14,7 +14,9 @@ import { NgxWebmonetizerModule } from 'ngx-webmonetizer';
     AppRoutingModule,
     NgxWebmonetizerModule.forRoot({
       paymentPointer: "PAY_ME",
-      automatic: true
+      automatic: false,
+      senderIdentifier: 'OVERRIDEVELOPER',
+      paymentReference: 'PS5_FUND'
     })
   ],
   providers: [],
