@@ -10,8 +10,9 @@ import { MonetizationEvents } from './enums';
   exports: []
 })
 export class NgxWebmonetizerModule {
+
   static forRoot(config: INgxWebMonetizerConfig): ModuleWithProviders {
-    if (!(<any> document).monetization && !config.production) {
+    if (!(<any> document).monetization && !config.disableLogs) {
       BROWSER_UNSUPPORTED_WARNING();
     }
 
@@ -30,7 +31,7 @@ export class NgxWebmonetizerModule {
   }
 
   static forChild(config: INgxWebMonetizerConfig): ModuleWithProviders {
-    if (!(<any> document).monetization && !config.production) {
+    if (!(<any> document).monetization && !config.disableLogs) {
       BROWSER_UNSUPPORTED_WARNING();
     }
 

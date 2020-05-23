@@ -13,7 +13,4 @@ export interface IPaymentLog {
     amount: number;
     requestId: string;
     paymentPointer: string;
-    senderIdentifier: string;
-    timestamp: number;
-    paymentReference: string;
 }
