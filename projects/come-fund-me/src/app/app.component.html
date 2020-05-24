@@ -1,21 +1,20 @@
-<h2>{{title}}</h2>
+<!-- <h2>{{title}}</h2>
 
 <h5>Monetizer Status => {{ ngxMonetizer.state | async }}</h5>
-<h6>Total => {{ngxMonetizer.total | async | currency }}</h6>
+<h6>Total => {{total | currency }}</h6>
 
 <ol>
-    <li *ngFor="let log of (ngxMonetizer.ledger | async)">
+    <li *ngFor="let log of ledger">
         <div>
             <div>Amount => {{log.currency}} {{log.amount}}</div>
             <div>Pointer => {{log.paymentPointer}}</div>
-            <div>Ref => {{log.paymentReference}}</div>
             <div>ReqID => {{log.requestId}}</div>
-            <div>SenderID => {{log.senderIdentifier}}</div>
-            <div>Time => {{convertToDate(log.timestamp)}}</div>
         </div>
     </li>
 </ol>
 
 <button (click)="start()">Start</button>
 <button (click)="stop()">Stop</button>
-<button (click)="progress()">Pay</button>
+<button (click)="progress()">Pay</button> -->
+
+<router-outlet></router-outlet>

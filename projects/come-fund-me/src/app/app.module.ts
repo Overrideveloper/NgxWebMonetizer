@@ -6,20 +6,17 @@ import { AppComponent } from './app.component';
 import { NgxWebmonetizerModule } from 'ngx-webmonetizer';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxWebmonetizerModule.forRoot({
-      paymentPointer: "PAY_ME",
       automatic: false,
-      senderIdentifier: 'OVERRIDEVELOPER',
-      paymentReference: 'PS5_FUND'
+      paymentPointer: 'PAY_ME'
     })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

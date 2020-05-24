@@ -1,0 +1,75 @@
+#landing-main {
+    background-color: rgb(253, 253, 253);
+}
+
+@media screen and (max-width: 768px) {
+    .faux-image {
+        height: 75px !important;
+    }
+}
+
+.banner {
+    margin-top: 48px;
+}
+
+.fund-count {
+    display: block;
+    margin-top: 16px;
+}
+
+.card {
+    border-radius: 8px;
+    height: 100%;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 0.5em 1em -0.125em rgba(0, 209, 178, 0.1), 0 0px 0 1px rgba(0, 209, 178, 0.1);
+    }
+}
+
+.faux-image {
+    height: 160px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-content {
+    padding: 1.5rem 1rem;
+}
+
+.project-detail {
+    margin: 8px 0 0 0;
+}
+
+.donate-cta {
+    margin-top: 16px;
+}
+
+.donation-gauge {
+    margin: 8px 0;
+    height: 5px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: ghostwhite;
+
+    .gauge-content {
+        height: inherit;
+        border-radius: inherit;
+    }
+}
+
+.more-link {
+    float: right;
+    font-size: 16px;
+    color: grey;
+    pointer-events: none;
+}
+
+.loader {
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    border-left-color: #00d1b2;
+    border-bottom-color: #00d1b2;
+}

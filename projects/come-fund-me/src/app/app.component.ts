@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxWebMonetizer } from 'ngx-webmonetizer';
+import { NgxWebMonetizer, IPaymentLog } from 'ngx-webmonetizer';
 
 interface IPayment {
   paymentPointer: string;
@@ -16,9 +16,15 @@ interface IPayment {
 })
 export class AppComponent {
   title = 'Come Fund Me';
+  total = 0;
+  ledger: IPaymentLog[] = [];
 
   constructor(public ngxMonetizer: NgxWebMonetizer) {
     ngxMonetizer.state.subscribe(val => console.log(val));
+    ngxMonetizer.newPayment.subscribe(payment => { 
+      this.total += payment.amount;
+      this.ledger.push(payment);
+    });
   }
 
   start() {

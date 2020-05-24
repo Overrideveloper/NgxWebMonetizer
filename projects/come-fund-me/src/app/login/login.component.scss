@@ -1,0 +1,43 @@
+.modal-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    height: auto;
+    width: 60%;
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem 2rem 2.5rem 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .login-card {
+        width: 85% !important;
+        padding: 1.5rem 1.5rem 2rem 1.5rem !important;
+    }
+}
+
+form {
+    margin-top: 24px;
+}
+
+.input {
+    border-radius: 4px;
+
+    &:focus {
+        box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25) !important;
+        border-color: #00d1b2;
+    }
+}
+
+.label {
+    font-size: 14px;
+}
+
+.form-info {
+    font-size: 11px;
+    display: block;
+    margin-top: 4px;
+}

@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.no-break {
+    word-break: normal;
+}
+
+.main-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.is-transparent {
+    background: transparent;
+}
+
+.swal2-modal {
+    width: 24em !important;
+
+    .swal2-icon {
+        margin: auto auto 8px auto !important;
+
+        &.swal2-question, &.swal2-info {
+            height: 32px !important;
+            width: 32px !important;
+
+            .swal2-icon-content {
+                font-size: 20px !important;
+            }
+        }
+    }
+
+    .swal2-title {
+        font-size: 20px !important;
+    }
+
+    .swal2-content {
+        font-size: 14px !important;
+    }
+
+    .swal2-actions {
+        button {
+            text-transform: uppercase;
+            font-size: 15px !important;
+        }
+    }
+
+    .swal2-footer {
+        a {
+            font-size: 12px;
+            text-align: center;
+            color: var(--main-light);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+<div>
+    <nav class="navbar is-transparent" role="navigation">
+        <div class="navbar-brand">
+            <h1 class="nav-logo has-text-white has-text-weight-semibold">ComeFundMe</h1>
+
+            <a class="navbar-burger burger" (click)="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+
+        <div class="navbar-menu is-paddingless" id="navbar-menu">
+            <div class="navbar-end">
+                <div class="navbar-item has-background-primary">
+                    <div class="buttons">
+                        <button (click)="authAction()" class="button is-white is-small is-outlined auth-btn has-text-weight-medium">{{authBtnText}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <app-login [redirectPath]="loginRedirectPath"></app-login>
+</div>

@@ -1,0 +1,37 @@
+.nav-logo {
+    height: fit-content;
+    font-size: 20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    padding: 1rem 3.75rem;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-logo {
+        margin-left: 0.75rem;
+        font-size: 18px;
+    }
+
+    .navbar {
+        padding: 0 0.75rem 0 0.5rem;
+    }
+}
+
+.burger {
+    height: 1.75rem;
+    width: 1.75rem;
+}
+
+.auth-btn {
+    width: 100px;
+
+    &:active, &:hover {
+        color: #00d1b2 !important;
+    }
+}

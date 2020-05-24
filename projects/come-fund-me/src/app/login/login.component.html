@@ -1,0 +1,33 @@
+<div class="modal" id="login-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="login-card">
+            <h1 class="nav-logo is-marginless has-text-primary has-text-centered has-text-weight-semibold">ComeFundMe</h1>
+            <small class="has-text-grey has-text-centered form-info">NB: This login form is a placebo, no authentication is actually happening.</small>
+
+            <form [formGroup]="loginForm" (submit)="login()">
+                <div class="field">
+                    <label class="label has-text-weight-medium">Username</label>
+                    <div class="control">
+                        <input type="text" class="input is-small" placeholder="johndoe" formControlName="username" />
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label has-text-weight-medium">Password</label>
+                    <div class="control">
+                        <input type="password" class="input is-small" placeholder="******" formControlName="password" />
+                    </div>
+                    <small class="has-text-grey form-info">Password should be at least 8 characters long</small>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        <button [disabled]="loginForm.invalid" class="button is-primary is-small is-fullwidth" id="login-btn">Sign in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <button (click)="closeLoginModal()" class="modal-close is-large" aria-label="close"></button>
+</div>

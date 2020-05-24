@@ -3,7 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDK1BmDbcD86RUgSg6zzfsO0Q3Pziy8YYk",
+    authDomain: "comefundme-9957f.firebaseapp.com",
+    databaseURL: "https://comefundme-9957f.firebaseio.com",
+    projectId: "comefundme-9957f",
+    storageBucket: "comefundme-9957f.appspot.com",
+    messagingSenderId: "419441242568",
+    appId: "1:419441242568:web:adc4899b6556c582afd0fd"
+  },
+  firebaseCredentials: {
+    email: 'data@comefundme.com',
+    password: 'fundraiser'
+  }
 };
 
 /*

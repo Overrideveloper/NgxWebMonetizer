@@ -1,0 +1,1 @@
+export const AUTH_STORAGE_KEY = 'COME_FUND_ME_AUTH';

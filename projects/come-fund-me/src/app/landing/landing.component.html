@@ -1,0 +1,62 @@
+<div class="container-fluid h-100">
+    <div class="main-flex h-100">
+        <div class="has-background-primary">
+            <app-navbar #navbar [loginRedirectPath]="loginRedirectPath"></app-navbar>
+            <section class="hero banner">
+                <div class="hero-body">
+                    <div class="container">
+                        <h2 class="title has-text-white is-size-3 no-break">Raise money for projects you care about.</h2>
+                        <h6 class="subtitle has-text-weight-light is-size-5 has-text-white" style="padding-top: 8px;">Get Started</h6>
+                        <button class="button is-white has-text-weight-light has-text-primary" disabled>Start a ComeFundMe</button>
+                        <small class="fund-count has-text-weight-light has-text-white">~23,400 projects funded</small>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="hero projects">
+            <div class="hero-body">
+                <div class="container">
+                    <h5 class="subtitle has-text-weight-semibold">Top Projects</h5>
+
+                    <ng-container *ngIf="projects; else loading">
+                        <ng-container *ngIf="projects.length; else noProjects">
+                            <div class="columns is-multiline is-mobile">
+                                <div *ngFor="let project of projects" class="column is-one-third-desktop is-full-mobile">
+                                    <div (click)="openProject(project)" class="card">
+                                        <div class="card-image">
+                                            <div class="faux-image has-background-primary"></div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="content">
+                                                <h6 class="title is-marginless">{{project.title}}</h6>
+                                                <p class="project-detail is-size-6">{{truncateText(project.description)}}</p>
+                                                
+                                                <div class="donate-cta">
+                                                    <div class="donation-gauge">
+                                                        <div [style.width]="raisedGoalPercent(project.amountRaised, project.goal) + '%'" class="gauge-content has-background-primary"></div>
+                                                    </div>
+                                                    <span class="has-text-weight-semibold">{{formatNumber(project.amountRaised)}} raised </span> <span>of {{formatNumber(project.goal)}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a class="more-link">See more &rarr;</a>
+                        </ng-container>
+
+                        <ng-template #noProjects>
+                            <h6 class="is-size-6 has-text-centered" style="color: lightgray;">There are no projects available at this time.</h6>
+                        </ng-template>
+                    </ng-container>
+
+                    <ng-template #loading>
+                        <div class="loader"></div>
+                    </ng-template>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
