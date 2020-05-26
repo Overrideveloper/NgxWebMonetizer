@@ -64,3 +64,21 @@ body {
         }
     }
 }
+
+.donation-gauge {
+    margin: 8px 0;
+    height: 5px;
+    width: 100%;
+    border-radius: 12px;
+    background-color: ghostwhite;
+
+    .gauge-content {
+        height: inherit;
+        border-radius: inherit;
+    }
+}
+
+.loader {
+    border-left-color: #00d1b2;
+    border-bottom-color: #00d1b2;
+}

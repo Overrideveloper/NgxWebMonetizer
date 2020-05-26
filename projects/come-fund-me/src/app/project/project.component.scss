@@ -1,0 +1,100 @@
+@media screen and (min-width: 768px) {
+    .project-info-container {
+        padding: 0 2.25rem;
+        margin: 0;
+    }
+    
+    .is-two-half-quarter-desktop {
+        width: 60%;
+        flex: none;
+    }
+
+    .is-one-half-quarter-desktop {
+        width: 40%;
+        flex: none;
+    }
+
+    .image-card {
+        height: 240px !important;
+    }
+}
+
+.card {
+    border-radius: 8px;
+}
+
+.image-card {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+}
+
+.project-details {
+    margin-top: 0.3rem;
+    .organizer, .date {
+        padding: 0.7rem 0;
+        border-bottom: 1px solid whitesmoke;
+    }
+
+    .description {
+        margin-top: 1.3rem;
+    }
+}
+
+.donation-control-buttons {
+    margin: 32px 0;
+
+    .button:last-of-type {
+        margin-top: 16px;
+    }
+}
+
+.donation-stats {
+    .donor-stat, .user-donation-stat {
+        padding: 0.7rem 0;
+        border-bottom: 1px solid whitesmoke;
+    }
+}
+
+.donor {
+    margin: 16px 0;
+    padding-bottom: 0.7rem;
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid whitesmoke;
+    }
+
+    h6 {
+        margin-bottom: 4px !important;
+        font-size: 15px;
+    }
+    span {
+        font-size: 14px;
+    }
+}
+
+.donor-buttons {
+    width: 100%;
+
+    .button {
+        display: block;
+        margin: auto;
+    }
+}
+
+.loader {
+    height: 50px;
+    width: 50px;
+    margin: 3rem auto;
+}
+
+.donation-disabled {
+    font-size: 12px;
+    display: block;
+}
+
+.toggle-monetization {
+    display: block;
+    font-size: 11px;
+    margin-left: auto;
+}

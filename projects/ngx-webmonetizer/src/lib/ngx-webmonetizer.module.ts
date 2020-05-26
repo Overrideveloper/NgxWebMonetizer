@@ -1,8 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { INgxWebMonetizerConfig } from './config/ngx-webmonetizer.config';
-import { NGX_WEBMONETIZER_CONFIG } from './config/ngx-webmonetizer.config.token';
-import { INJECT_META_TAG, BROWSER_UNSUPPORTED_WARNING } from './utils';
-import { MonetizationEvents } from './enums';
+import { BROWSER_UNSUPPORTED_WARNING } from './utils';
+import { NgxWebMonetizer } from './ngx-webmonetizer.service';
 
 @NgModule({
   declarations: [],
@@ -10,42 +8,14 @@ import { MonetizationEvents } from './enums';
   exports: []
 })
 export class NgxWebmonetizerModule {
-
-  static forRoot(config: INgxWebMonetizerConfig): ModuleWithProviders {
-    if (!(<any> document).monetization && !config.disableLogs) {
+  static initialize(): ModuleWithProviders {
+    if (!(<any> document).monetization) {
       BROWSER_UNSUPPORTED_WARNING();
-    }
-
-    if (config.automatic) {
-      INJECT_META_TAG(config.paymentPointer);
-      const event = new CustomEvent(MonetizationEvents.PENDING);
-      (<any> document).monetization.dispatchEvent(event);
     }
 
     return {
       ngModule: NgxWebmonetizerModule,
-      providers: [
-        { provide: NGX_WEBMONETIZER_CONFIG, useValue: config }
-      ]
-    };
-  }
-
-  static forChild(config: INgxWebMonetizerConfig): ModuleWithProviders {
-    if (!(<any> document).monetization && !config.disableLogs) {
-      BROWSER_UNSUPPORTED_WARNING();
-    }
-
-    if (config.automatic) {
-      INJECT_META_TAG(config.paymentPointer);
-      const event = new CustomEvent(MonetizationEvents.PENDING);
-      (<any> document).monetization.dispatchEvent(event);
-    }
-
-    return {
-      ngModule: NgxWebmonetizerModule,
-      providers: [
-        { provide: NGX_WEBMONETIZER_CONFIG, useValue: config }
-      ]
+      providers: [NgxWebMonetizer]
     };
   }
 }

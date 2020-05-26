@@ -1,8 +1,4 @@
-/*
- * Public API Surface of ngx-webmonetizer
- */
-
 export * from './lib/ngx-webmonetizer.service';
 export * from './lib/ngx-webmonetizer.module';
-export * from './lib/config/ngx-webmonetizer.config';
-export { IPaymentLog } from './lib/types/index'
+export { IPayment, WebMonetizerStatus } from './lib/types/index';
+export { MonetizationEvents } from './lib/enums/index';
