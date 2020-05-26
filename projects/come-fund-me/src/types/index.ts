@@ -8,14 +8,3 @@ export interface IProject {
     goal: number;
     amountRaised: number;
 }
-
-export interface IAuth {
-    username: string;
-}
-
-export interface IDonation {
-    id?: string;
-    amount: number;
-    name: string;
-    timestamp: number;
-}

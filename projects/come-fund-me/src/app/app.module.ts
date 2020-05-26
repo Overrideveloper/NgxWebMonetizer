@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxWebmonetizerModule } from 'ngx-webmonetizer';
@@ -9,7 +10,10 @@ import { NgxWebmonetizerModule } from 'ngx-webmonetizer';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxWebmonetizerModule.initialize()
+    NgxWebmonetizerModule.forRoot({
+      automatic: false,
+      paymentPointer: 'PAY_ME'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],

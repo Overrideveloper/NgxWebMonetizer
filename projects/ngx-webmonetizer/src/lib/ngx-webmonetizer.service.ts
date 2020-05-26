@@ -1,15 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { NGX_WEBMONETIZER_CONFIG } from './config/ngx-webmonetizer.config.token';
+import { INgxWebMonetizerConfig } from './config/ngx-webmonetizer.config';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { WebMonetizerStatus, IPayment, IProgressEventDetail} from './types/index';
+import { WebMonetizerStatus, IPayment, IPaymentLog} from './types/index';
 import { INJECT_META_TAG, REMOVE_META_TAG, BROWSER_UNSUPPORTED_WARNING } from './utils';
 import { MonetizationEvents } from './enums';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NgxWebMonetizer {
   public state: BehaviorSubject<WebMonetizerStatus>;
-  public newPayment: Subject<IPayment> = new Subject();
+  public newPayment: Subject<IPaymentLog> = new Subject();
 
-  constructor() {
+  constructor(@Inject(NGX_WEBMONETIZER_CONFIG) private config: INgxWebMonetizerConfig) {
     this.initialize();
   }
 
@@ -20,19 +22,25 @@ export class NgxWebMonetizer {
       (<any> document).monetization.addEventListener(MonetizationEvents.START, () => this.state.next("started"));
       (<any> document).monetization.addEventListener(MonetizationEvents.PENDING, () => this.state.next("pending"));
       (<any> document).monetization.addEventListener(MonetizationEvents.STOP, () => this.state.next("stopped"));
-      (<any> document).monetization.addEventListener(MonetizationEvents.PROGRESS, (event: CustomEvent) => this.emitNewPayment(<IProgressEventDetail> event.detail));
+
+      (<any> document).monetization.addEventListener(MonetizationEvents.PROGRESS, (event: CustomEvent) => {
+        const _event = new CustomEvent(MonetizationEvents.START);
+        (<any> document).monetization.dispatchEvent(_event);
+
+        this.addPaymentLog(<IPayment> event.detail);
+      });
     }
   }
 
-  private async emitNewPayment(detail: IProgressEventDetail) {
-    const payment: IPayment = {
-      currency: detail.assetCode,
-      amount: this.scaleAmountDown(detail.amount, detail.assetScale),
-      paymentPointer: detail.paymentPointer,
-      requestId: detail.requestId
+  private async addPaymentLog(payment: IPayment) {
+    const paymentLog: IPaymentLog = {
+      currency: payment.assetCode,
+      amount: this.scaleAmountDown(payment.amount, payment.assetScale),
+      paymentPointer: payment.paymentPointer,
+      requestId: payment.requestId
     }
 
-    this.newPayment.next(payment);
+    this.newPayment.next(paymentLog);
   }
 
   private scaleAmountDown(amount: string, scale: number) {
@@ -42,15 +50,27 @@ export class NgxWebMonetizer {
   public stop() {
     if ((<any> document).monetization) {
       REMOVE_META_TAG();
+
+      const event = new CustomEvent(MonetizationEvents.STOP);
+      (<any> document).monetization.dispatchEvent(event);
     } else {
-      BROWSER_UNSUPPORTED_WARNING();
+      this.throwBrowserUnsupportedWarning();
     }
   }
 
-  public start(paymentPointer: string) {
+  public start() {
     if ((<any> document).monetization) {
-      INJECT_META_TAG(paymentPointer);
+      INJECT_META_TAG(this.config.paymentPointer);
+
+      const event = new CustomEvent(MonetizationEvents.PENDING);
+      (<any> document).monetization.dispatchEvent(event);
     } else {
+      this.throwBrowserUnsupportedWarning();
+    }
+  }
+
+  private throwBrowserUnsupportedWarning() {
+    if (!this.config.disableLogs) {
       BROWSER_UNSUPPORTED_WARNING();
     }
   }

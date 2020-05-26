@@ -1,5 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { AUTH_STORAGE_KEY } from '../constants';
-import { IAuth } from '../types';
+import { IProject } from '../types';
 
-export const AUTH_SUBJECT: BehaviorSubject<IAuth> = new BehaviorSubject(JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY)));
+export const AUTH_SUBJECT: BehaviorSubject<any> = new BehaviorSubject(JSON.parse(localStorage.getItem(AUTH_STORAGE_KEY)));
+export const PROJECTS_SUBJECT: BehaviorSubject<IProject[]> = new BehaviorSubject(null);

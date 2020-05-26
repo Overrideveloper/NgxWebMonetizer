@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { AUTH_SUBJECT } from '../../subjects';
 import { AUTH_STORAGE_KEY } from '../../constants';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,11 +10,10 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   @Input() loginRedirectPath: string;
-  @Input() transparent: boolean;
 
   authBtnText: 'Sign in' | 'Log out';
 
-  constructor(private router: Router) {
+  constructor() {
     AUTH_SUBJECT.subscribe(val => this.authBtnText = val ? 'Log out' : 'Sign in');
   }
 
@@ -36,7 +34,6 @@ export class NavbarComponent {
         if (logout.value) {
           localStorage.removeItem(AUTH_STORAGE_KEY);
           AUTH_SUBJECT.next(null);
-          this.router.navigate(['']);
         }
       });
     } else {

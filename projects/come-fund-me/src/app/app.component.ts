@@ -1,4 +1,13 @@
 import { Component } from '@angular/core';
+import { NgxWebMonetizer, IPaymentLog } from 'ngx-webmonetizer';
+
+interface IPayment {
+  paymentPointer: string;
+  requestId: string;
+  amount: string;
+  assetCode: string;
+  assetScale: number;
+}
 
 @Component({
   selector: 'app-root',
@@ -6,5 +15,40 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor() { }
+  title = 'Come Fund Me';
+  total = 0;
+  ledger: IPaymentLog[] = [];
+
+  constructor(public ngxMonetizer: NgxWebMonetizer) {
+    ngxMonetizer.state.subscribe(val => console.log(val));
+    ngxMonetizer.newPayment.subscribe(payment => { 
+      this.total += payment.amount;
+      this.ledger.push(payment);
+    });
+  }
+
+  start() {
+    this.ngxMonetizer.start();
+  }
+
+  stop() {
+    this.ngxMonetizer.stop();
+  }
+
+  progress() {
+    const detail: IPayment = {
+      paymentPointer: "PAY_ME",
+      requestId: '12345',
+      amount: '289',
+      assetCode: 'USD',
+      assetScale: 2
+    };
+
+    const event = new CustomEvent("monetizationprogress", { detail });
+    (<any> document).monetization.dispatchEvent(event);
+  }
+
+  convertToDate(time: number) {
+    return new Date(time).toDateString();
+  }
 }

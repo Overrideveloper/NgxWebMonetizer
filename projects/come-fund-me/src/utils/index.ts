@@ -9,7 +9,3 @@ export function FORMAT_NUMBER_READABLE(value: number) {
     
     return output.toString().replace('G', 'B');
 }
-
-export function CALCULATE_PERCENTAGE(numerator, denominator) {
-    return (numerator/denominator) * 100;
-}
