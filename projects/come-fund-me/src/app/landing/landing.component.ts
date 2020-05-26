@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { IProject } from '../../types';
-import { TRUNCATE_TEXT, FORMAT_NUMBER_READABLE } from '../../utils';
-import { PROJECTS_SUBJECT, AUTH_SUBJECT } from '../../subjects';
-import Swal from 'sweetalert2';
+import { TRUNCATE_TEXT, FORMAT_NUMBER_READABLE, CALCULATE_PERCENTAGE } from '../../utils';
+import { AUTH_SUBJECT } from '../../subjects';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
 
@@ -19,8 +18,6 @@ export class LandingComponent implements OnInit {
   projects: IProject[];
 
   ngOnInit() {
-    PROJECTS_SUBJECT.subscribe(projects => this.projects = projects);
-
     this.loadProjects();
   }
 
@@ -30,7 +27,7 @@ export class LandingComponent implements OnInit {
         const projects: IProject[] = [];
 
         res.forEach(doc => projects.push(<IProject> { ...doc.data(), id: doc.id }));
-        PROJECTS_SUBJECT.next(projects);
+        this.projects = projects;
       });
     }).catch(err => console.log(err));
   }
@@ -44,7 +41,7 @@ export class LandingComponent implements OnInit {
   }
 
   raisedGoalPercent(amountRaised: number, goal: number) {
-    const percentage = (amountRaised/goal) * 100;
+    const percentage = CALCULATE_PERCENTAGE(amountRaised, goal);
 
     return percentage >= 100 ? 100 : percentage;
   }

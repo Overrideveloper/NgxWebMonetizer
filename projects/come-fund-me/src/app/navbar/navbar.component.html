@@ -1,5 +1,5 @@
 <div>
-    <nav class="navbar is-transparent" role="navigation">
+    <nav class="navbar" [ngClass]="{'is-transparent': transparent, 'has-background-primary': !transparent }" role="navigation">
         <div class="navbar-brand">
             <h1 class="nav-logo has-text-white has-text-weight-semibold">ComeFundMe</h1>
 

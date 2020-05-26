@@ -1,6 +1,6 @@
 export type WebMonetizerStatus = 'unsupported' | 'pending' | 'started' | 'stopped'
 
-export interface IPayment {
+export interface IProgressEventDetail {
     paymentPointer: string;
     requestId: string;
     amount: string;
@@ -8,7 +8,7 @@ export interface IPayment {
     assetScale: number;
 }
 
-export interface IPaymentLog {
+export interface IPayment {
     currency: string;
     amount: number;
     requestId: string;

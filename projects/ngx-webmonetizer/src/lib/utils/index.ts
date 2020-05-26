@@ -8,13 +8,13 @@ export function INJECT_META_TAG(value: string) {
 
     let doesTagExist = false;
 
-    monetizationTags.map(tag => {
-        if (tag.content !== value) {
-            head.removeChild(tag);
+    for (let monetizationTag of monetizationTags) {
+        if (monetizationTag.content !== value) {
+            monetizationTag.remove();
         } else {
             doesTagExist = true;
         }
-    });
+    }
 
     if (!doesTagExist) {
         head.appendChild(tag);
@@ -22,10 +22,11 @@ export function INJECT_META_TAG(value: string) {
 }
 
 export function REMOVE_META_TAG() {
-    const head: HTMLHeadElement = document.getElementsByTagName('head')[0];
-    const monetizationTags: HTMLMetaElement[] = Array.from(document.querySelectorAll('meta[name="monetization"]'));
+    const tag = <HTMLMetaElement> document.querySelector('meta[name="monetization"]');
 
-    monetizationTags.map(el => head.removeChild(el));
+    if (tag) {
+        tag.remove();
+    }
 }
 
 export function BROWSER_UNSUPPORTED_WARNING() {
