@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { IProject, IDonation } from '../../types';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IProject, IDonation, DonationEventType } from '../../types';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { FORMAT_NUMBER_READABLE, CALCULATE_PERCENTAGE } from '../../utils';
 import { NgxWebMonetizer, WebMonetizerStatus, MonetizationEvents, IPayment } from 'ngx-webmonetizer';
 import { AUTH_SUBJECT } from '../../subjects';
+import { DonorsComponent } from '../donors/donors.component';
 
 @Component({
   templateUrl: './project.component.html',
@@ -18,7 +19,8 @@ export class ProjectComponent implements OnInit {
   simulatePaymentTimer: any;
   username: string;
   userDonation: IDonation;
-  otherDonations: IDonation[];
+  donations: IDonation[];
+  @ViewChild('donorsModal', { static: false}) donorsModal: DonorsComponent;
 
   constructor(private route: ActivatedRoute, private data: DataService, private ngxWebMonetizer: NgxWebMonetizer) { }
 
@@ -41,7 +43,7 @@ export class ProjectComponent implements OnInit {
   }
 
   get donorCount() {
-    return this.otherDonations.length;
+    return this.donations.length;
   }
 
   get donorCountText() {
@@ -51,7 +53,19 @@ export class ProjectComponent implements OnInit {
   }
 
   get donorPreviewList() {
-    return this.otherDonations.filter(donor => donor.id !== this.username).slice(0, 5);
+    return this.donations.filter(donor => donor.id !== this.username).slice(0, 5);
+  }
+
+  get showSeeAllBtn() {
+    let flag;
+
+    if (this.userDonation) {
+      flag = this.donorCount && ((this.donorPreviewList.length + 1) > this.donorCount);
+    } else {
+      flag = this.donorCount && (this.donorPreviewList.length > this.donorCount);
+    }
+
+    return flag;
   }
 
   saveNewPaymentEntry(payment: IPayment) {
@@ -62,7 +76,7 @@ export class ProjectComponent implements OnInit {
 
       if (this.userDonation) {
         this.data.database.collection('projects').doc(this.projectID).collection('donations').doc(this.username)
-        .update({ amount: this.userDonation.amount + payment.amount }).then(() => {
+        .update({ amount: this.userDonation.amount + payment.amount, timestamp: new Date().getTime() }).then(() => {
           console.log('User donation saved');
         }).catch(err => console.log(err));
       } else {
@@ -140,7 +154,7 @@ export class ProjectComponent implements OnInit {
           }
         })
 
-        this.otherDonations = donations;
+        this.donations = donations;
       });
     }).catch(err => console.log(err));
   }
@@ -153,5 +167,17 @@ export class ProjectComponent implements OnInit {
     const percentage = CALCULATE_PERCENTAGE(amountRaised, goal);
 
     return percentage >= 100 ? 100 : percentage;
+  }
+
+  viewDonors() {
+    this.donorsModal.open();
+  }
+
+  handleDonationEvent(event: DonationEventType) {
+    if (event === 'start') {
+      this.startDonating();
+    } else {
+      this.stopDonating();
+    }
   }
 }

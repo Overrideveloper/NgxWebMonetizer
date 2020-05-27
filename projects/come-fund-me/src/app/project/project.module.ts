@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarModule } from '../navbar/navbar.module';
 import { ProjectComponent } from './project.component';
 import { PipesModule } from '../../pipes/pipes.module';
+import { DonorsModule } from '../donors/donors.module';
 
 @NgModule({
   declarations: [ProjectComponent],
@@ -11,6 +12,7 @@ import { PipesModule } from '../../pipes/pipes.module';
     CommonModule,
     NavbarModule,
     PipesModule,
+    DonorsModule,
     RouterModule.forChild([
       { path: '', component: ProjectComponent }
     ])

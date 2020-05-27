@@ -1,0 +1,40 @@
+<div class="modal" id="donors-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div class="donors-card">
+            <div class="card-head">
+                <div class="card-title">
+                    <h6 class="has-text-weight-bold">Donations ({{formatAmount(amountDonated)}})</h6>
+                    <button class="button is-rounded" (click)="toggleSortType()">{{sortBtnText}}</button>
+                </div>
+                
+                <ng-container *ngIf="isMonetizationStartedOrPending; else notStartedDonating">
+                    <button (click)="stopDonating()" class="donate-btn button is-danger is-light has-text-weight-semibold">Stop donating</button>
+                </ng-container>
+
+                <ng-template #notStartedDonating>
+                    <button (click)="startDonating()" [disabled]="!isMonetizationSupported" class="donate-btn button is-primary has-text-weight-semibold">Donate now</button>
+                </ng-template>
+            </div>
+            <div class="card-body" [ngClass]="{'no-donations': noDonations}">
+                <ng-container *ngIf="noDonations; else donations">
+                    <div class="no-donations-msg">
+                        <h6 class="has-text-centered" style="color: lightgrey;">No donations made yet</h6>
+                    </div>
+                </ng-container>
+
+                <ng-template #donations>
+                    <div class="donor-list">
+                        <div class="donor" *ngFor="let donor of sortDonors(this.sortType)">
+                            {{donor.timestamp}}
+                            <h6 class="has-text-weight-normal is-marginless">{{donor.name === username ? 'You' : donor.name}}</h6>
+                            <span class="has-text-weight-bold">{{formatAmount(donor.amount)}}</span> <span class="has-text-grey-light"> &#8901; {{donor.timestamp | timeproxx}}</span>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <button (click)="close()" class="modal-close is-large" aria-label="close"></button>
+</div>

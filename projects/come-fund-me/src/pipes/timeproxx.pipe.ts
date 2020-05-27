@@ -10,8 +10,8 @@ export class TimeproxxPipe implements PipeTransform {
 
   timeproxx(timestamp: number) {
     const base = { hour: 3600, minute: 60, day: 86400 };
-    const timeNow = new Date().getTime() / 1000;
-    const margin = timeNow - timestamp;
+    const timeNow = new Date().getTime()/1000;
+    const margin = timeNow - (timestamp / 1000);
 
     let time = margin / base.hour;
     let result: any;

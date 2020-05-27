@@ -1,6 +1,5 @@
 export interface IProject {
     id: string;
-    auto: boolean;
     timestamp: number;
     organizer: string;
     description: string;
@@ -19,3 +18,6 @@ export interface IDonation {
     name: string;
     timestamp: number;
 }
+
+export type DonorSortType = 'recent' | 'top';
+export type DonationEventType = 'start' | 'stop';

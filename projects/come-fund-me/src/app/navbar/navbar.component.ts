@@ -14,9 +14,13 @@ export class NavbarComponent {
   @Input() transparent: boolean;
 
   authBtnText: 'Sign in' | 'Log out';
+  username: string;
 
   constructor(private router: Router) {
-    AUTH_SUBJECT.subscribe(val => this.authBtnText = val ? 'Log out' : 'Sign in');
+    AUTH_SUBJECT.subscribe(val => {
+      this.username = val ? val.username : null;
+      this.authBtnText = val ? 'Log out' : 'Sign in'
+    });
   }
 
   toggleMenu() {

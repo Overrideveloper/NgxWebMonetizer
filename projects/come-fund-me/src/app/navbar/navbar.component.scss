@@ -1,6 +1,7 @@
 .nav-logo {
     height: fit-content;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .navbar-brand {
@@ -34,4 +35,12 @@
     &:active, &:hover {
         color: #00d1b2 !important;
     }
+}
+
+.username {
+    background: rgb(255 255 255 / 0.95);
+    color: #00d1b2;
+    font-size: 14px;
+    border-radius: 102px;
+    padding: 0 8px 3px;
 }

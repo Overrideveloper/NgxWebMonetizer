@@ -1,0 +1,101 @@
+.donors-card {
+    width: 85%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.card-head {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    box-shadow: 0 -5px 1em -0.2em rgba(10, 10, 10, 0.86), 0 1px 0px 0 rgba(220, 220, 220, 0.5);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+    h6 {
+        margin: 0;
+        font-size: 15px;
+        text-transform: uppercase;
+    }
+
+    button {
+        background-color: white;
+        box-shadow: 0 0.5em 1em -0.125em rgba(220, 220, 220, 0.3), 0 0px 0 1px rgba(220, 220, 220, 0.3);
+        color: black;
+        border: none;
+        font-size: 13px;
+
+        &:active, &:hover {
+            background-color: rgba(220, 220, 220, 0.3);
+            box-shadow: none;
+        }
+    }
+}
+
+.donate-btn {
+    font-size: 16px;
+    margin: 16px auto;
+    width: 80%;
+    display: block;
+    height: 48px;
+}
+
+.card-body {
+    max-height: 40vh;
+    width: 100%;
+    overflow-y: scroll;
+
+    &.no-donations {
+        overflow: hidden;
+    }
+}
+
+.no-donations-msg {
+    padding: 2rem 0;
+}
+
+.donor-list {
+    padding: 0 1.5rem;
+}
+
+.donor {
+    margin: 16px 0;
+    padding-bottom: 0.7rem;
+
+    &:not(:last-of-type) {
+        border-bottom: 1px solid whitesmoke;
+    }
+
+    h6 {
+        margin-bottom: 4px !important;
+        font-size: 15px;
+    }
+
+    span {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .card-title {
+        h6, button {
+            margin: 4px 0;
+        }
+    }
+
+    .donate-btn {
+        width: 100%;
+    }
+
+    .card-body {
+        max-height: 32vh;
+        width: 100%;
+        overflow-y: scroll;
+    }
+}

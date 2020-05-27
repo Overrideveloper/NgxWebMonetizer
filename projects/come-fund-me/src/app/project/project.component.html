@@ -4,7 +4,7 @@
 
         <section class="section" style="padding-top: 2rem;">
             <div class="project-info-container">
-                <ng-container *ngIf="project; else loading">
+                <ng-container *ngIf="project && donations; else loading">
                     <h5 class="is-size-3 has-text-weight-bold">{{project.title}}</h5>
 
                     <div class="columns is-multiline is-mobile" style="margin-top: 1rem;">
@@ -49,14 +49,18 @@
                                                 <span class="has-text-weight-bold">{{formatAmount(donor.amount)}}</span> <span class="has-text-grey-light"> &#8901; {{donor.timestamp | timeproxx}}</span>
                                             </div>
                                         </div>
-                                        <div class="donor-buttons">
-                                            <button class="button is-primary is-outlined has-text-weight-bold">See all</button>
+                                        <div *ngIf="showSeeAllBtn" class="donor-buttons">
+                                            <button (click)="viewDonors()" class="button is-primary is-outlined has-text-weight-bold">See all</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <app-donors [isMonetizationStartedOrPending]="isMonetizationStartedOrPending" [isMonetizationSupported]="isMonetizationSupported"
+                    [amountDonated]="project.amountRaised" [donations]="donations" [username]="username"
+                    (donationEvent)="handleDonationEvent($event)" #donorsModal></app-donors>
                 </ng-container>
                 <ng-template #loading>
                     <div class="loader"></div>

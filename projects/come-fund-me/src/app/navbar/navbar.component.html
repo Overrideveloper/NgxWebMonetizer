@@ -1,7 +1,7 @@
 <div>
     <nav class="navbar" [ngClass]="{'is-transparent': transparent, 'has-background-primary': !transparent }" role="navigation">
         <div class="navbar-brand">
-            <h1 class="nav-logo has-text-white has-text-weight-semibold">ComeFundMe</h1>
+            <a [routerLink]="['/landing']" class="nav-logo has-text-white has-text-weight-semibold">ComeFundMe</a>
 
             <a class="navbar-burger burger" (click)="toggleMenu()">
                 <span></span>
@@ -16,6 +16,9 @@
                     <div class="buttons">
                         <button (click)="authAction()" class="button is-white is-small is-outlined auth-btn has-text-weight-medium">{{authBtnText}}</button>
                     </div>
+                </div>
+                <div class="navbar-item has-background-primary">
+                    <span *ngIf="username" class="username">{{username}}</span>
                 </div>
             </div>
         </div>

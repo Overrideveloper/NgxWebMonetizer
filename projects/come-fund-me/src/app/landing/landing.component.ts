@@ -47,7 +47,7 @@ export class LandingComponent implements OnInit {
   }
 
   openProject(project: IProject) {
-    const navPath = project.auto ? `/project/auto/${project.id}` : `/project/${project.id}`;
+    const navPath = `/project/${project.id}`;
 
     if (AUTH_SUBJECT.getValue()) {
       this.router.navigate([navPath]);

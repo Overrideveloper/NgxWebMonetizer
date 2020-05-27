@@ -5,17 +5,17 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
-    projectId: "",
-    storageBucket: "",
-    messagingSenderId: "",
-    appId: ""
+    apiKey: "AIzaSyDK1BmDbcD86RUgSg6zzfsO0Q3Pziy8YYk",
+    authDomain: "comefundme-9957f.firebaseapp.com",
+    databaseURL: "https://comefundme-9957f.firebaseio.com",
+    projectId: "comefundme-9957f",
+    storageBucket: "comefundme-9957f.appspot.com",
+    messagingSenderId: "419441242568",
+    appId: "1:419441242568:web:adc4899b6556c582afd0fd"
   },
   firebaseCredentials: {
-    email: "",
-    password: ""
+    email: "data@comefundme.com",
+    password: "fundraiser"
   }
 };
 

@@ -82,3 +82,9 @@ body {
     border-left-color: #00d1b2;
     border-bottom-color: #00d1b2;
 }
+
+.modal-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
