@@ -1,24 +1,75 @@
 # NgxWebmonetizer
+A Web Monetization library for Angular.
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.
+```
+npm install ngx-webmonetizer
+```
 
-## Code scaffolding
+# What is Web Monetization?
+Web Monetization is a proposed API standard that allows websites to request a stream of very small payments from a user. Read more on Web Monetization [here](https://webmonetization.org/docs/explainer)
 
-Run `ng generate component component-name --project ngx-webmonetizer` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-webmonetizer`.
-> Note: Don't forget to add `--project ngx-webmonetizer` or else it will be added to the default project in your `angular.json` file. 
+# What is NgxWebmonetizer?
+NgxWebmonetizer is a library that provides a quick and easy way to add Web Monetization to your web apps.
 
-## Build
+# Quickstart
+Add Web Monetization to your first application by following [the quickstart guide](docs/quickstart.md).
 
-Run `ng build ngx-webmonetizer` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Example use:
+```typescript
+import { Component } from '@angular/core';
+import { NgxWebMonetizer, WebMonetizerState, IWebMonetizerPayment } from 'ngx-webmonetizer';
 
-## Publishing
+@Component({
+  selector: 'app-root',
+  template: `
+    <div>
+        <h5>Monetization State => {{ monetizationState }}</h5>
+        <h6>Total => {{ currency }} {{ total }}</h6>
 
-After building your library with `ng build ngx-webmonetizer`, go to the dist folder `cd dist/ngx-webmonetizer` and run `npm publish`.
+        <button (click)="startStreamingPayments()">Start Streaming Payments</button>
+        
+        <button (click)="stopStreamingPayments()">Stop Streaming Payments</button>
 
-## Running unit tests
+        <ol>
+            <li *ngFor="let payment of payments">
+                <ul>
+                    <li>Amount: {{ payment.currency }} {{ payment.amount }}</li>
+                    <li>Request ID: {{ payment.requestId }}</li>
+                    <li>Payment Pointer: {{ payment.paymentPointer }}</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+  `
+})
+export class MyApp {
+    monetizationState: WebMonetizerState;
+    payments: IWebMonetizerPayment[] = [];
+    currency: string;
+    total: number = 0;
 
-Run `ng test ngx-webmonetizer` to execute the unit tests via [Karma](https://karma-runner.github.io).
+    constructor(private monetizer: NgxWebMonetizer) {
+        monetizer.state.subscribe(state => this.monetizationState = state);
+        monetizer.newPayment.subscribe(payment => {
+            this.payments.push(payment);
+            this.total += payment.amount;
 
-## Further help
+            if (!this.currency) {
+                this.currency = payment.currency;
+            }
+        });
+    }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+    startStreamingPayments() {
+        this.monetizer.start('YOUR_PAYMENT_POINTER');
+    }
+
+    stopStreamingPayments() {
+        this.monetizer.stop;
+    }
+}
+
+```
+
+# Resources
+Stackblitz Template - Remember to import the NgxWebmonetizerModule in `app/app.module.ts`
