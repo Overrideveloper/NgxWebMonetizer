@@ -3,7 +3,7 @@ import { IProject, IDonation, DonationEventType } from '../../types';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { FORMAT_NUMBER_READABLE, CALCULATE_PERCENTAGE } from '../../utils';
-import { NgxWebMonetizer, WebMonetizerStatus, MonetizationEvents, IPayment } from 'ngx-webmonetizer';
+import { NgxWebMonetizer, WebMonetizerState, MonetizationEvents, IWebMonetizerPayment } from 'ngx-webmonetizer';
 import { AUTH_SUBJECT } from '../../subjects';
 import { DonorsComponent } from '../donors/donors.component';
 
@@ -15,7 +15,7 @@ export class ProjectComponent implements OnInit {
   project: IProject;
   projectID: string;
   paymentPointer: string;
-  monetizationState: WebMonetizerStatus;
+  monetizationState: WebMonetizerState;
   simulatePaymentTimer: any;
   username: string;
   userDonation: IDonation;
@@ -68,7 +68,7 @@ export class ProjectComponent implements OnInit {
     return flag;
   }
 
-  saveNewPaymentEntry(payment: IPayment) {
+  saveNewPaymentEntry(payment: IWebMonetizerPayment) {
     this.data.authorize().then(() => {
       this.data.database.collection('projects').doc(this.projectID).update({ amountRaised: this.project.amountRaised + payment.amount }).then(() => {
         console.log('Amount Raised updated');

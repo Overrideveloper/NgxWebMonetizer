@@ -9,7 +9,7 @@ import { NgxWebmonetizerModule } from 'ngx-webmonetizer';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxWebmonetizerModule.initialize()
+    NgxWebmonetizerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

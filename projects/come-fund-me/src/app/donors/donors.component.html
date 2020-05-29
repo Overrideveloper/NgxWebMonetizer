@@ -26,7 +26,6 @@
                 <ng-template #donations>
                     <div class="donor-list">
                         <div class="donor" *ngFor="let donor of sortDonors(this.sortType)">
-                            {{donor.timestamp}}
                             <h6 class="has-text-weight-normal is-marginless">{{donor.name === username ? 'You' : donor.name}}</h6>
                             <span class="has-text-weight-bold">{{formatAmount(donor.amount)}}</span> <span class="has-text-grey-light"> &#8901; {{donor.timestamp | timeproxx}}</span>
                         </div>
