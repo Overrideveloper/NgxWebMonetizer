@@ -7,13 +7,14 @@ import { MonetizationEvents } from './enums';
 @Injectable()
 export class NgxWebMonetizer {
   public state: BehaviorSubject<WebMonetizerStatus>;
-  public newPayment: Subject<IPayment> = new Subject();
+  public newPayment: Subject<IPayment>;
 
   constructor() {
     this.initialize();
   }
 
   private async initialize() {
+    this.newPayment = new Subject();
     this.state = new BehaviorSubject(!(<any> document).monetization ? 'unsupported' : (<any> document).monetization.state);
 
     if ((<any> document).monetization) {
