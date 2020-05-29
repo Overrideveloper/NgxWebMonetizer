@@ -6,10 +6,10 @@ npm install ngx-webmonetizer
 ```
 
 # What is Web Monetization?
-Web Monetization is a proposed API standard that allows websites to request a stream of very small payments from a user. Read more on Web Monetization [here](https://webmonetization.org/docs/explainer)
+Web Monetization is a proposed API standard that allows websites to request a stream of very small payments from a user. Read more on Web Monetization [here](https://webmonetization.org/docs/explainer).
 
 # What is NgxWebmonetizer?
-NgxWebmonetizer is a library that provides a quick and easy way to add Web Monetization to your web apps.
+NgxWebmonetizer is a library that provides a quick and easy way to add Web Monetization to your Angular web apps.
 
 # Quickstart
 Add Web Monetization to your first application by following [the quickstart guide](docs/quickstart.md).
@@ -72,4 +72,6 @@ export class MyApp {
 ```
 
 # Resources
-Stackblitz Template - Remember to import the NgxWebmonetizerModule in `app/app.module.ts`
+[Stackblitz Template](https://stackblitz.com/edit/ngx-webmonetizer-demo) - Remember to import the NgxWebmonetizerModule in `app/app.module.ts`
+
+[Demo Application](https://comefundme-9957f.web.app)

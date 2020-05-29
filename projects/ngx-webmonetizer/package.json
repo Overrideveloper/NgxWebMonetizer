@@ -1,6 +1,17 @@
 {
   "name": "ngx-webmonetizer",
-  "version": "0.0.1",
+  "version": "1.0.1",
+  "description": "NgxWebmonetizer is a library that provides a quick and easy way to add Web Monetization to your Angular web apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Overrideveloper/NgxWebMonetizer/tree/master/projects/ngx-webmonetizer"
+  },
+  "author": "Overrideveloper",
+  "license": "MIT",
+  "keywords": [
+    "web",
+    "monetization"
+  ],
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
