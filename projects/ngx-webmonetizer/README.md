@@ -72,6 +72,6 @@ export class MyApp {
 ```
 
 # Resources
-[Stackblitz Template](https://stackblitz.com/edit/ngx-webmonetizer-demo) - Remember to import the NgxWebmonetizerModule in `app/app.module.ts`
+[CodeSandbox Demo](https://codesandbox.io/s/ngx-webmonetizer-demo-5j83b)
 
 [Demo Application](https://comefundme-9957f.web.app)
